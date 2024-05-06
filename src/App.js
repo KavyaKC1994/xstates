@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import "./App.css";
 
@@ -13,7 +12,12 @@ export default function App() {
   useEffect(() => {
     async function fetchCountries() {
       try {
-        const response = await fetch("https://crio-location-selector.onrender.com/countries");
+        const response = await fetch(
+          "https://crio-location-selector.onrender.com/countries"
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch countries");
+        }
         const data = await response.json();
         setCountries(data);
       } catch (error) {
